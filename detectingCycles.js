@@ -1,9 +1,11 @@
 var fs  = require('fs');
-var tortoise=1,
-	hare=2;
-var mu=0;
+
 
 fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
+    var tortoise=1,
+	hare=2;
+	var mu=0;
+
     if (line != '') {
     	var lineArr = line.split(' ').map(function(elem){
     		return parseInt(elem,10)
@@ -25,11 +27,20 @@ fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) 
 
     	}
 
-
+    	var lam=1;
+    	hare=tortoise;
+    	while (tortoise !== hare) {
+    		hare++;
+    		lam ++;
+    	}
 
     	console.log('tortoise: ' + tortoise + ' hare: ' + hare);
     	console.log(lineArr[tortoise%length]);
     	console.log('mu position: ' + mu);
+
+    	console.log('lam: ' + lam + ' mu: ' + mu);
+
+
 		tortoise=1, hare=2, mu=0;
 
 	}
@@ -40,3 +51,4 @@ fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) 
 
 
 
+// 
