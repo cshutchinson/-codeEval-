@@ -1,39 +1,38 @@
 var fs  = require('fs');
-var turtle=0,
-	hare=null,
-	i=1;
+var tortoise=1,
+	hare=2;
+var mu=0;
+
 fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
     if (line != '') {
     	var lineArr = line.split(' ').map(function(elem){
     		return parseInt(elem,10)
     	});
     	console.log(lineArr);
-    	
+    	var length = lineArr.length-1;
+    
+	    while (lineArr[tortoise%length] !== lineArr[hare%length]){
+	    	console.log('tortoise: ' + tortoise + ' hare: ' + hare);
+	    	tortoise++;
+	    	hare +=2 ;
+	    }
+
+	    tortoise = 0;
+	    while (lineArr[tortoise%length] !== lineArr[hare%length]){
+    		tortoise++;
+    		hare ++;
+    		mu ++;
+
+    	}
+
+
+
+    	console.log('tortoise: ' + tortoise + ' hare: ' + hare);
+    	console.log(lineArr[tortoise%length]);
+    	console.log('mu position: ' + mu);
+		tortoise=1, hare=2, mu=0;
+
 	}
-
-	// set turtle and hare to start of array
-
-	// increment turtle by 1 - increment hare by 2
-
-	// are array values equal -> cycle exists
-
-	// are array values null -> end of list no cycle
-
-
-    while (turtle !== hare){
-    	turtle = lineArr[i-1];
-    	hare = lineArr[i*2-1]; 
-    	console.log('turtle: ' + turtle + ' hare: ' + hare);
-    	i++
-    }
-
-	if (turtle===hare){
-		console.log (i-2);
-		console.log (i*2-1);
-		
-	}
-
-
 });
 
 
